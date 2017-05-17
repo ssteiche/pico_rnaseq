@@ -18,7 +18,7 @@ SAMPLE=${SAMPLES[$(($LSB_JOBINDEX - 1))]}
 R1=fastq/${SAMPLE}.fastq.gz
 R2=""
 
-$MAPPER -m 5 --gunzip -d $SPECIES $KNOWN_SPLICE $MAX_MM -i2 -n1 -Q --nofails -B5 -t12 --read-group-id=$SAMPLE --read-group-name=$SAMPLE --read-group-library=$SAMPLE --read-group-platform=illumina -A sam $R1 $R2 > alignments/$SAMPLE.sam
+$MAPPER -t 12 -d $SPECIES --gunzip $KNOWN_SPLICE $MAX_MM --speed 2 --use-shared-memory 0 --novelsplicing 1 -i 2 --nofails --read-group-id=$SAMPLE --read-group-name=$SAMPLE --read-group-library=$SAMPLE --read-group-platform=illumina -A sam $R1 $R2 > alignments/$SAMPLE.sam
 
 samtools view -hbS alignments/$SAMPLE.sam > alignments/$SAMPLE.bam
 
