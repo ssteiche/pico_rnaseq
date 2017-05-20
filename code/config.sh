@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
+
+
+
 alignment_dir=alignments
 GSNAP_DIR=$HOME/bin/gsnap_2017-05-08/bin
 MAPDIR=$HOME/gmapdb
 MAPPER=$GSNAP_DIR/gsnap
 fastq_folder=fastq
 SPECIES=se107_orig
+fasta=$HOME/Projects/llaurens/se107/assembly/SE107.scaffolds.fa
+gtf_ref=genome/se107_augustus_minimal.gtf
 SNPS=""
 MAX_MM="--max-mismatches=0.06"
 PLATFORM=illumina
