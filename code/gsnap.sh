@@ -22,3 +22,6 @@ $MAPPER -t 12 -d $SPECIES --gunzip $KNOWN_SPLICE $MAX_MM --speed 2 --use-shared-
 
 samtools view -hbS alignments/$SAMPLE.sam > alignments/$SAMPLE.bam
 
+samtools sort alignments/$SAMPLE.bam alignments/${SAMPLE}_sorted
+
+
