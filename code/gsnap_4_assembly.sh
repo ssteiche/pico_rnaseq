@@ -18,9 +18,12 @@ R2=""
 # like previous run, but force --single end so that multiple fastqs are treated as single reads.
 # also keep failed alignments so trinity can use them
 
-#$MAPPER -t 12 -d $SPECIES --gunzip --force-single-end $KNOWN_SPLICE $MAX_MM --speed 2 --use-shared-memory 0 -n 1 --novelsplicing 1 -i 2 --read-group-id=$SAMPLE --read-group-name=$SAMPLE --read-group-library=$SAMPLE --read-group-platform=illumina -A sam $R1 $R2 > alignments/$SAMPLE.sam
+$MAPPER -t 12 -d $SPECIES --gunzip --force-single-end $KNOWN_SPLICE $MAX_MM --speed 2 --use-shared-memory 0 -n 1 --novelsplicing 1 -i 2 --read-group-id=$SAMPLE --read-group-name=$SAMPLE --read-group-library=$SAMPLE --read-group-platform=illumina -A sam $R1 $R2 > alignments/$SAMPLE.sam
 
-#samtools view -hbS alignments/$SAMPLE.sam > alignments/$SAMPLE.bam
+samtools view -hbS alignments/$SAMPLE.sam > alignments/$SAMPLE.bam
 
 samtools sort -@ 12 -m 4G alignments/$SAMPLE.bam alignments/${SAMPLE}_sorted
+
+rm alignments/$SAMPLE.sam
+rm alignments/$SAMPLE.bam
 

@@ -24,4 +24,6 @@ samtools view -hbS alignments/$SAMPLE.sam > alignments/$SAMPLE.bam
 
 samtools sort alignments/$SAMPLE.bam alignments/${SAMPLE}_sorted
 
+rm alignments/$SAMPLE.sam
+rm alignments/$SAMPLE.bam
 
