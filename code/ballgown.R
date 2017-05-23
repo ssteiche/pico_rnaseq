@@ -5,6 +5,7 @@ library(ballgown)
 library(genefilter)
 library(dplyr)
 
+
 pheno_data <- read.delim("data/stress_expt_meta.txt")
 pheno_data <- arrange(pheno_data, sample)
 
@@ -19,4 +20,17 @@ row.max.fpkm = apply(X, 1, max)
 X = X[row.max.fpkm > 5, ]
 colnames(X) = gsub("FPKM.", "", colnames(X))
 X = t(X)
+
+
+
+
+# How to plot transcripts
+# plotTranscripts(
+#   gene = "MSTRG.7817", 
+#   gown = express_data, 
+#   sample = c("9hr_S1_Rot", "9hr_S2_Rot", "9hr_S1_FD", "9hr_S2_FD", "9hr_S1_Con", "9hr_S2_Con"), 
+#   meas = "FPKM"
+# )
+
+
 
