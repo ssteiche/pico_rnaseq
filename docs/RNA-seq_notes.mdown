@@ -1,0 +1,97 @@
+
+# Notes on the RNA-seq analysis of Desmodesmus
+
+---------------------------
+
+TODO:
+
+- write script to identify max intron length. First grab a list of all introns (exons with same gene or transcript ID). Then subtract pos2 - pos1
+- write script to identify split genes
+- install latest version of gsnap
+- build genome index for gsnap
+- run read filtering step (no trimming)
+
+
+-------------------------
+
+
+The genome of Desmodesmus is broken up into **xx** scaffolds. Some **(need a number)** of the gaps created by these scaffolds occur in the middle of genes. The expression level of these genes at these gaps will likely be off.
+
+Some solutions to this problem:
+
+1. Align reads to the existing genome. After assembling transcripts with cufflinks or stringtie, merge the expression of the split genes by averaging the TPM values
+
+2. Use a program such as [Trinity](trinity) to quantify the transcription levels. Trinity has the ability to use an existing genome reference to guide the assembly. First reads are aligned to the genome using GSNAP, then the .bam file is fed to Trinity for the alignment.
+
+need to know the max intron length. This can be gleaned from the existing genome annotation
+
+3. Use a program like [PASA](pasa) to update the genome reference. Afterwards, use a conventional RNA-seq pipeline to run the analysis.
+
+
+## Develop a script to identify split genes
+
+- load annotation data for Arabidopsis, Chlamy, KEGG, and blast2go
+- identify multiple gene annotation IDs occuring on different scaffolds
+- check that duplicates occur at ends of scaffold
+- check that no genes lie between it and the end of the scaffold
+- check for validation for multiple annotations
+
+### For split gene, g8527 and g7555
+
+From the blast2go file called `b2g_generic`
+
+The sequence description:
+
+    g8527	DNA topoisomerase 1-like [Gossypium hirsutum]
+    g7555	DNA topoisomerase 1 [Auxenochlorella protothecoides]
+
+There are roughly 16 blast hist for each g8527 and g7555. The following two hits are found in both:
+
+    gi|1063100619|gb|JAT77143.1|hypothetical protein g.29331 [Auxenochlorella protothecoides]
+    gi|675355434|gb|KFM27874.1|DNA topoisomerase 1 [Auxenochlorella protothecoides]
+
+    gi|1063100619|gb|JAT77143.1|hypothetical protein g.29331 [Auxenochlorella protothecoides]
+    gi|675355434|gb|KFM27874.1|DNA topoisomerase 1 [Auxenochlorella protothecoides]
+
+The Gene Identifiers (1063100619 and 675355434) as well as the Accession IDs (JAT77143.1 and KFM27874.1) are split out into separate columns in the table.
+
+The mapping gene name F751_5439 is found for both
+
+    g8527	F751_5439;B456_007G311800;TOP1
+    g7555	F751_5439;COCSUDRAFT_15325;MIMGU_mgv1a001121mg
+
+The following mapping GO IDs are found for both (all g7555 are found in g8527)
+
+    GO:0005694-IEA;GO:0003917-IEA;GO:0016853-IEA;GO:0003918-IEA;GO:0003677-IEA;GO:0006265-IEA
+
+The following mapping GO IDs are only found for g8527
+
+	GO:0005730-IBA;GO:0006265-IBA;GO:0031298-IBA;GO:0006338-IBA;GO:0006260-IBA;GO:0007059-IBA;
+
+## Build genome index for GSNAP
+
+download latest version of GSNAP and build it:
+
+    wget http://research-pub.gene.com/gmap/src/gmap-gsnap-2017-04-24.tar.gz
+    tar xzvf gmap-gsnap-2017-04-24.tar.gz
+    cd gmap-2017-04-24
+    mkdir $HOME/bin/gsnap_2017-04-24
+    ./configure --prefix=$HOME/bin/gsnap_2017-04-24 --with-gmapdb=$HOME/gmapdb MAX_STACK_READLENGTH=250
+    make
+    make install
+
+
+## change names of scaffolds
+
+According to the GSNAP README, contigs can have the same chromosome name and have different positional information. This might allow GSNAP to map reads across a contig gap. If I can identify the split genes, I can specify the position so that the contigs splitting a gene are near each other. The hope is that GSNAP will align reads across the gap.
+
+## Align
+
+
+
+
+[trinity]: https://github.com/trinityrnaseq/trinityrnaseq/wiki
+[pasa]:    http://pasapipeline.github.io/#A_ComprehensiveTranscriptome
+
+
+
