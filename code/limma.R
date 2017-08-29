@@ -84,6 +84,8 @@ time      <- x[["sampling.time.in.hrs"]]
 library(splines)
 time = ns(time, df = 1)
 
+# TODO: why not model.matrix(~ time + treatment) ??
+
 design <- model.matrix(~ treatment * time)
 colnames(design) <- c("intercept", "cold", "hot", "time", "cold:time", "hot:time")
 fit <- lmFit(X.sub, design)
