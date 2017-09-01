@@ -6,8 +6,10 @@ library(tidyr)
 library(ggplot2)
 library(limma)
 
-source("code/ballgown.R")
+source("code/load_ballgown_data.R")
 source("code/load_annotation.R")
+
+X <- load_ballgown_data()
 
 # TODO: come up with a better name (this is the original expression data as a matrix) we want to convert to a data frame so it can be merged with the results files
 df = t(X)
