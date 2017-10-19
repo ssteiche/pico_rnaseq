@@ -2,7 +2,7 @@
 #BSUB -J trinity
 #BSUB -o logs/trinity_%J.out
 #BSUB -e logs/trinity_%J.err
-#BSUB -R "select[mem>60] rusage[mem=60] span[hosts=1]"
+#BSUB -R "select[mem>150] rusage[mem=150] span[hosts=1]"
 #BSUB -n 12
 #BSUB -P llaurens
 
