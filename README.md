@@ -1,10 +1,10 @@
 
-# Code for rocessing raw RNA-seq data for SE107
+# Code for processing RNAseq data for SE107 *Desmodesmus armatus*
 
 
 ## Quick Start
 
-0. Setup the `config.sh` file with your settings
+0. Setup the `config.sh` file with your settings and fix sequence reads
 1. Build a genome index for SE107 for your favorite aligner
 2. Align reads to the SE107 genome
 3. Assemble transcripts with StringTie allowing for novel isoforms
@@ -37,17 +37,17 @@ The config file is where all the project specific parameters and sample names
 should go. The other scripts should be as abstract as possible for reuse. 
 
 
-## build\_gsnap\_genome.sh
+## 01\_build-gsnap-genome.sh
 
 This script builds the necessary genome index for GSNAP.
 
 
-## gsnap.sh
+## 02\_gsnap.sh
 
 This script aligns reads to the SE107 genome with GSNAP
 
 
-## stringtie.sh
+## 02\_stringtie.sh
 
 This script is a wrapper for the following three scripts. It queues the scripts in LSF so that they are run sequentially for each sample 
 
@@ -56,7 +56,7 @@ This script is a wrapper for the following three scripts. It queues the scripts 
 
 This script assembles transcripts allowing for novel isoform assembly
 
-### stringtie\_merge.sh
+### stringtie\_step2\_merge.sh
 
 This script merges the known and novel isoforms for all samples into a master transcriptome reference
 
