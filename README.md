@@ -1,12 +1,12 @@
 
-# Code for processing RNAseq data for SE107 *Desmodesmus armatus*
-
+# Code for processing RNAseq data for TG1 and TG2 *Picochlorum celeri*
+# Adapted from https://github.com/dpastling/se107_rnaseq
 
 ## Quick Start
 
 0. Setup the `config.sh` file with your settings and fix sequence reads
-1. Build a genome index for SE107 for your favorite aligner
-2. Align reads to the SE107 genome
+1. Build a genome index for TG2 and TG1 for your favorite aligner
+2. Align reads to the TG2 or TG1 genome
 3. Assemble transcripts with StringTie allowing for novel isoforms
 4. Merge isoforms for each sample into a master transcriptome reference
 5. Re-assemble transcripts using the new master transcriptome reference
