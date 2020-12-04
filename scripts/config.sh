@@ -3,11 +3,12 @@
 
 
 
-alignment_dir=alignments
+alignment_dir=/mnt/f/genomics/scen_rnaseq/alignments
 GSNAP_DIR=$HOME/bin/gsnap_2017-05-08/bin
-MAPDIR=$HOME/gmapdb
-MAPPER=$GSNAP_DIR/gsnap
-fastq_folder=fastq
+MAPDIR=$HOME/projects/gmapdb
+MAPPER="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif gsnap"
+SAMTOOLS="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif samtools"
+fastq_folder=/mnt/f/genomics/scen_rnaseq
 SPECIES=se107_orig
 fasta=$HOME/Projects/llaurens/se107/assembly/SE107.scaffolds.fa
 gtf_ref=genome/se107_augustus_minimal.gtf
