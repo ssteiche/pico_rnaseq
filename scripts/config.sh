@@ -8,6 +8,7 @@ GSNAP_DIR=$HOME/bin/gsnap_2017-05-08/bin
 MAPDIR=$HOME/projects/gmapdb
 MAPPER="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif gsnap"
 SAMTOOLS="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif samtools"
+TRINITY="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif Trinity"
 fastq_folder=/mnt/f/genomics/scen_rnaseq
 SPECIES=se107_orig
 fasta=$HOME/Projects/llaurens/se107/assembly/SE107.scaffolds.fa
