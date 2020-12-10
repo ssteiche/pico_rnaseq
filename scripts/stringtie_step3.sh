@@ -11,17 +11,20 @@
 # catch unset variables, non-zero exits in pipes and calls, enable x-trace.
 set -o nounset -o pipefail -o errexit -x
 
-source code/config.sh
+source config.sh
 
-sample=${SAMPLES[$(($LSB_JOBINDEX - 1))]}
-bam=alignments/${sample}_sorted.bam
+#sample=${SAMPLES[$(($LSB_JOBINDEX - 1))]}
+#bam=alignments/${sample}_sorted.bam
 
-stringtie -eB \
--p 12 \
--G genome/stringtie_merge.gtf \
--m 150 \
--c 5 \
--o ballgown/$sample/${sample}_step3.gtf \
-$bam
-
+for SAMPLE in ${SAMPLES[@]}
+do
+	bam=/mnt/f/genomics/scen_rnaseq/alignments/${SAMPLE}_sorted.bam
+	$stringtie -eB \
+	-p 12 \
+	-G /mnt/f/genomics/scen_rnaseq/genome/stringtie_merge.gtf \
+	-m 150 \
+	-c 5 \
+	-o /mnt/f/genomics/scen_rnaseq/ballgown/$SAMPLE/${SAMPLE}_step3.gtf \
+	$bam
+done
 

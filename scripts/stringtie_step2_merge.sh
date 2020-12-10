@@ -11,20 +11,20 @@
 # catch unset variables, non-zero exits in pipes and calls, enable x-trace.
 set -o nounset -o pipefail -o errexit -x
 
-source code/config.sh
+source config.sh
 
-ls stringtie/*.gtf > stringtie/merged_list.txt
+ls $stringtie_dir/*.gtf > $stringtie_dir/merged_list.txt
 
-stringtie --merge stringtie/merged_list.txt \
--o genome/stringtie_merge.gtf \
+$stringtie --merge $stringtie_dir/merged_list.txt \
+-o /mnt/f/genomics/scen_rnaseq/genome/stringtie_merge.gtf \
 -p 12 \
--G $gtf_ref \
+-G /mnt/f/genomics/scen_rnaseq/$gtf_ref \
 -m 150 \
 -c 5 \
 -F 5
 
-
-gffcompare –r $gtf_ref –G –o compare genome/stringtie_merge.gtf
+### Not currently installed in container. Add then re-do
+#gffcompare –r $gtf_ref –G –o compare genome/stringtie_merge.gtf
 
 
 # followup with

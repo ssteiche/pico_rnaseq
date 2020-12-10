@@ -4,11 +4,13 @@
 
 
 alignment_dir=/mnt/f/genomics/scen_rnaseq/alignments
+stringtie_dir=/mnt/f/genomics/scen_rnaseq/stringtie
 GSNAP_DIR=$HOME/bin/gsnap_2017-05-08/bin
 MAPDIR=$HOME/projects/gmapdb
 MAPPER="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif gsnap"
 SAMTOOLS="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif samtools"
-TRINITY="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif Trinity"
+stringtie="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt/f/genomics/scen_rnaseq $HOME/containers/prna.sif stringtie"
+TRINITY="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/trinityrnaseq.v2.11.0.simg Trinity"
 fastq_folder=/mnt/f/genomics/scen_rnaseq
 SPECIES=se107_orig
 fasta=$HOME/Projects/llaurens/se107/assembly/SE107.scaffolds.fa
@@ -90,5 +92,6 @@ SAMPLES=(
 9hr_S2_Rot
 )
 
+TEMP_SAMPLES="/mnt/0hr_RT_P1.fastq.gz /mnt/0hr_RT_P2.fastq.gz /mnt/1hr_C_P1.fastq.gz /mnt/1hr_C_P2.fastq.gz /mnt/1hr_H_P1.fastq.gz /mnt/1hr_H_P2.fastq.gz /mnt/1hr_RT_P1.fastq.gz /mnt/1hr_RT_P2.fastq.gz /mnt/24hr_C_P1.fastq.gz /mnt/24hr_C_P2.fastq.gz /mnt/24hr_H_P1.fastq.gz /mnt/24hr_H_P2.fastq.gz /mnt/24hr_RT_P1.fastq.gz /mnt/24hr_RT_P2.fastq.gz /mnt/3hr_C_P1.fastq.gz /mnt/3hr_C_P2.fastq.gz /mnt/3hr_H_P1.fastq.gz /mnt/3hr_H_P2.fastq.gz /mnt/3hr_RT_P1.fastq.gz /mnt/3hr_RT_P2.fastq.gz /mnt/72hr_C_P1.fastq.gz /mnt/72hr_C_P2.fastq.gz /mnt/72hr_H_P1.fastq.gz /mnt/72hr_H_P2.fastq.gz /mnt/72hr_RT_P1.fastq.gz /mnt/72hr_RT_P2.fastq.gz /mnt/9hr_C_P1.fastq.gz /mnt/9hr_C_P2.fastq.gz /mnt/9hr_H_P1.fastq.gz /mnt/9hr_H_P2.fastq.gz /mnt/9hr_RT_P1.fastq.gz /mnt/9hr_RT_P2.fastq.gz"
 
 

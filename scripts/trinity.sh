@@ -9,6 +9,8 @@
 # catch unset variables, non-zero exits in pipes and calls, enable x-trace.
 set -o nounset -o pipefail -o errexit -x
 
+source config.sh
+
 $TRINITY \
 --genome_guided_bam /mnt/alignments/temperature_expt_sorted.bam \
 --max_memory 100G \
@@ -16,5 +18,5 @@ $TRINITY \
 --genome_guided_min_coverage 50 \
 --genome_guided_min_reads_per_partition 50 \
 --CPU 8 \
---output trinity_assembly
+--output /mnt/trinity_assembly
 
