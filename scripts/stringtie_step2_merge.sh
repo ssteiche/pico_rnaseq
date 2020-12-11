@@ -24,7 +24,7 @@ $stringtie --merge $stringtie_dir/merged_list.txt \
 -F 5
 
 ### Not currently installed in container. Add then re-do
-#gffcompare –r $gtf_ref –G –o compare genome/stringtie_merge.gtf
+#$GFFCOMPARE -r /mnt/f/genomics/scen_rnaseq/$gtf_ref -G -o compare /mnt/f/genomics/scen_rnaseq/genome/stringtie_merge.gtf
 
 
 # followup with

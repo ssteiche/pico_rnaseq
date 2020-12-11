@@ -11,6 +11,8 @@ MAPPER="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/container
 SAMTOOLS="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif samtools"
 stringtie="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt/f/genomics/scen_rnaseq $HOME/containers/prna.sif stringtie"
 TRINITY="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/trinityrnaseq.v2.11.0.simg Trinity"
+# Need to install gffcompare into singularity container
+GFFCOMPARE="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt/f/genomics/scen_rnaseq $HOME/containers/prna.sif gffcompare"
 fastq_folder=/mnt/f/genomics/scen_rnaseq
 SPECIES=se107_orig
 fasta=$HOME/Projects/llaurens/se107/assembly/SE107.scaffolds.fa
