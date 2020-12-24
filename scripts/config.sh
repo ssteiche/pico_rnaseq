@@ -4,24 +4,31 @@
 
 
 alignment_dir=/mnt/f/genomics/scen_rnaseq/alignments
+mik_alignment_dir=/mnt/f/genomics/scen_rnaseq/mikado_alignments
 stringtie_dir=/mnt/f/genomics/scen_rnaseq/stringtie
 GSNAP_DIR=$HOME/bin/gsnap_2017-05-08/bin
 MAPDIR=$HOME/projects/gmapdb
+mik_MAPDIR=/mnt/gmapdb
 MAPPER="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif gsnap"
 SAMTOOLS="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/prna.sif samtools"
 stringtie="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt/f/genomics/scen_rnaseq $HOME/containers/prna.sif stringtie"
 TRINITY="singularity exec --bind /mnt/f/genomics/scen_rnaseq:/mnt $HOME/containers/trinityrnaseq.v2.11.0.simg Trinity"
 fastq_folder=/mnt/f/genomics/scen_rnaseq
 SPECIES=se107_orig
+mik_SPECIES=se107_mik
 fasta=$HOME/Projects/llaurens/se107/assembly/SE107.scaffolds.fa
 gtf_ref=genome/se107_augustus_minimal.gtf
 SNPS=""
 MAX_MM="--max-mismatches=0.06"
 PLATFORM=illumina
 KNOWN_SPLICE="--use-splicing=se107_orig.splicesites"
+mik_KNOWN_SPLICE="--use-splicing=se107_mik.splicesites"
 
 if [[ ! -d $alignment_dir ]]; then
         mkdir -p $alignment_dir
+fi
+if [[ ! -d $mik_alignment_dir ]]; then
+	        mkdir -p $mik_alignment_dir
 fi
 if [[ ! -d logs ]]; then
         mkdir logs
