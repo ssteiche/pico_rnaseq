@@ -49,3 +49,17 @@ mikado compare -r se107_augustus_minimal.gtf --index
 mikado compare -r se107_augustus_minimal.gtf -p mikado_prepared.gtf -o compare_input -l compare_input.log
 mikado compare -r se107_augustus_minimal.gtf -p mikado.subloci.gff3 -o compare_subloci -l compare_subloci.log
 mikado compare -r se107_augustus_minimal.gtf -p mikado.loci.gff3 -o compare -l compare.log
+
+##################################################################################################
+# Follow up with alignment of reads providing snap with new mikado transcript annotations
+##################################################################################################
+
+time ./02_mik_loc_gsnap.sh
+#real    681m12.104s
+#user    1980m8.791s
+#sys     355m31.342s
+
+# Now that sequences are aligned again we will calculate read coverage tables with StinrTie -eB
+# Note that this skips the generation of stringtie gtfs and merging. Could consider doing, but seems redundant to mikado
+
+time ./mik_stringtie_step3.sh
