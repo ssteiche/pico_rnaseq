@@ -63,3 +63,6 @@ time ./02_mik_loc_gsnap.sh
 # Note that this skips the generation of stringtie gtfs and merging. Could consider doing, but seems redundant to mikado
 
 time ./mik_stringtie_step3.sh
+#real    43m6.677s
+#user    25m32.721s
+#sys     3m45.056s
