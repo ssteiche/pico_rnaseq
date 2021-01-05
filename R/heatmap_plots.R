@@ -42,9 +42,16 @@ df = dplyr::filter(df,
 
 #################################
 
-kegg = read.delim("~/Projects/llaurens/se107/kegg_terms.txt")
-kegg.annotations = read.delim("~/Projects/llaurens/se107/annotation/kegg_kaas_sbh_augustus.ko.txt", header = FALSE, na.strings = "")
+kegg = read.delim("data/kegg_terms.txt")
+kegg.annotations = read.delim("data/kegg_kaas_sbh_augustus.ko.txt", header = FALSE, na.strings = "")
 colnames(kegg.annotations) = c("gene", "ortholog")
+
+tmap = read.delim("data/compare.stringtie_merge.gtf.tmap")
+tmap = tmap %>%
+	filter(ref_gene_id != "-") %>%
+	group_by(qry_gene_id) %>%
+	summarise(ref_gene_id = paste(sort(unique(ref_gene_id)), collapse = ";")) %>%
+	ungroup()
 
 kegg = left_join(kegg, kegg.annotations, by = "ortholog")
 kegg = left_join(kegg, tmap, by = c("gene" = "ref_gene_id"))
@@ -56,13 +63,29 @@ glycolysis.genes = dplyr::filter(kegg, grepl("Glycolysis", description))
 starch.genes = dplyr::filter(kegg, grepl("Starch and sucrose metabolism", description))
 carbon.fix.genes = dplyr::filter(kegg, grepl("Carbon fixation in photosynthetic organisms", description))
 tca.cycle.genes = dplyr::filter(kegg, grepl("TCA cycle", description))
+
+annot = read.delim("data/se107_nr_generic.txt")
+annot = select(annot,
+	       Sequence.Name,
+	       Sequence.Description,
+	       Sequence.Length,
+	       Blast.Top.Hit.Accession,
+	       Mapping.Gene.Name,
+	       Mapping.GO.ID,
+	       Mapping.GO.Term,
+	       Mapping.GO.Category,
+	       Annotation.GO.ID,
+	       Annotation.GO.Term,
+	       Annotation.GO.Category,
+	       Enzyme.Name
+)
+
 extracellular = dplyr::filter(annot, 
 	grepl("extracell", Annotation.GO.Term) | 
 	grepl("extracell", Mapping.GO.Term) | 
 	grepl("extracell", InterPro.GO.Term),
 	! is.na(stringtie.gene.id)
 )
-
 
 #df = dplyr::filter(df, gene %in% tca.cycle.genes[["gene"]])
 df = dplyr::filter(df, gene %in% extracellular[["stringtie.gene.id"]])

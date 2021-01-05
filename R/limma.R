@@ -24,6 +24,8 @@ df = mutate(df, gene = rownames(df))
 #    - These responses are most likely to be linear
 #    - likely identify the primary responses to the treatment
 ################################################################
+pheno_data   <- read.delim("data/stress_expt_meta.txt")
+pheno_data   <- arrange(pheno_data, sample)
 x <- dplyr::filter(pheno_data, type.of.stress == "abiotic", sampling.time.in.hrs <= 9) %>% arrange(treatment, sampling.time.in.hrs)
 X.sub = X[x[["sample"]], ]
 X.sub = t(X.sub)
